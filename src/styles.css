@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Mali, cursive !important; }
+.mat-stepper-vertical, .mat-stepper-horizontal {
+  font-family: Mali, cursive !important;
+}
+mat-card{
+  border-radius: 10px;
+}
+.mat-mdc-dialog-container .mdc-dialog__title {
+  font-family: Mali, cursive !important;
+}
+.mat-mdc-dialog-container .mdc-dialog__content {
+  font-family: Mali, cursive !important;
+}

@@ -1,0 +1,275 @@
+<div class="content-dialog">
+  <mat-card class="card-header">
+    <mat-card-content>
+      <!-- <h4>ข้อมูลใบเสนอราคา</h4> -->
+      <p class="h4">ข้อมูลใบเสนอราคา</p>
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="savedatamaster()">บันทึก</button>
+      <button mat-raised-button color="warn" (click)="dialogRef.close()">ยกเลิก</button>
+    </mat-card-actions>
+  </mat-card>
+  <br>
+
+  <mat-stepper #stepper>
+    <mat-step>
+      <ng-template matStepLabel>ข้อมูลทั่วไป</ng-template>
+      <mat-card>
+        <mat-card-content>
+
+          <div class="d-flex justify-content-between">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">เลขที่เอกสาร</label>
+              <input type="text" class="form-control" [(ngModel)]="data_doc.doc_no">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">วันที่เอกสาร</label>
+              <input type="date" class="form-control" [(ngModel)]="data_doc.doc_date">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <label for="inputAddress" class="form-label">ชื่อลูกค้า</label>
+              <input type="text" class="form-control" [(ngModel)]="data_doc.customer_name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="inputAddress" class="form-label">ที่อยู่</label>
+              <input type="text" class="form-control" [(ngModel)]="data_doc.customer_address">
+            </div>
+          </div>
+
+          <div class="my-2">
+            <p style="padding-top: 20px;" class="h4">รายการจ่ายตามงวด</p>
+
+            <mat-divider></mat-divider>
+            <div class="container">
+              <div class="row">
+                <div class="col-2">
+                  ลำดับ
+                </div>
+                <div class="col-6">
+                  รายการ
+                </div>
+                <div class="col-3">
+                  ราคา
+                </div>
+                <div class="col-1">
+
+                </div>
+              </div>
+              <div *ngFor="let item of lessondata; let i = index" class="row">
+                <div class="col-2">
+                  <input type="text" class="form-control" [value]="i+1" readonly>
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" [(ngModel)]="item.detail">
+                </div>
+                <div class="col-3">
+                  <input type="number" class="form-control" (change)="calprice()" [(ngModel)]="item.sum_price">
+                </div>
+                <div class="col-1">
+                  <button mat-mini-fab color="primary" (click)="addlessondata()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="my-2">
+            <p style="padding-top: 20px;" class="h4">รายการจ่ายทันที</p>
+            <mat-divider></mat-divider>
+            <div class="container">
+              <div class="row">
+                <div class="col-2">
+                  ลำดับ
+                </div>
+                <div class="col-6">
+                  รายการ
+                </div>
+                <div class="col-3">
+                  ราคา
+                </div>
+                <div class="col-1">
+
+                </div>
+              </div>
+              <div *ngFor="let item of instantpayment; let i = index" class="row">
+                <div class="col-2">
+                  <input type="text" class="form-control" [value]="i+1" readonly>
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" [(ngModel)]="item.detail">
+                </div>
+                <div class="col-3">
+                  <input type="number" class="form-control" (change)="calprice()" [(ngModel)]="item.sum_price">
+                </div>
+                <div class="col-1">
+                  <button mat-mini-fab color="primary" (click)="addinstantpayment()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-2">
+            <div class="container">
+              <div class="row">
+                <div class="col-8">
+                  <p class="text-end p-3">เป็นจำนวนเงินทั้งสิ้น</p>
+                </div>
+                <div class="col-3">
+                  <input type="number" class="form-control text-end" [(ngModel)]="data_price.sum" readonly>
+                </div>
+                <div class="col-1">
+                  <p class="text-end p-3">บาท</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-8">
+                  <p class="text-end p-3">ส่วนลด</p>
+                </div>
+                <div class="col-3">
+                  <input type="number" class="form-control text-end" [(ngModel)]="data_price.discount"
+                    (change)="calprice()">
+                </div>
+                <div class="col-1">
+                  <p class="text-end p-3">บาท</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-8">
+                  <p class="text-end p-3">ภาษีมูลค่าเพิ่ม (vat7%)</p>
+                </div>
+                <div class="col-3">
+                  <input type="number" class="form-control text-end" [(ngModel)]="data_price.vat" readonly>
+                </div>
+                <div class="col-1">
+                  <p class="text-end p-3">บาท</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-8">
+                  <p class="text-end p-3">คงเหลือที่ต้องจ่าย</p>
+                </div>
+                <div class="col-3">
+                  <input type="number" class="form-control text-end" [(ngModel)]="data_price.total" readonly>
+                </div>
+                <div class="col-1">
+                  <p class="text-end p-3">บาท</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </mat-card-content>
+      </mat-card>
+
+      <div class="mt-2">
+        <mat-card>
+          <mat-card-header>
+            <p class="h5">รายละเอียดการแบ่งจ่าย 3 งวดงาน</p>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div class="col-2">
+                    <p class="text-start p-3">งวดที่ 1</p>
+                  </div>
+                  <div class="col-3">
+                    <p class="text-start p-3">ชำระเมื่อทำสัญญา</p>
+                  </div>
+                  <div class="col-1">
+                    <p class="text-start p-3">40%+{{sum_inst}}</p>
+                  </div>
+                  <div class="col-2">
+                    <p class="text-end p-3">เป็นเงิน</p>
+                  </div>
+                  <div class="col-3">
+                    <input type="number" class="form-control text-end" [(ngModel)]="lessonprice.lesson1" readonly>
+                  </div>
+                  <div class="col-1">
+                    <p class="text-start p-3">บาท</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-2">
+                    <p class="text-start p-3">งวดที่ 2</p>
+                  </div>
+                  <div class="col-3">
+                    <p class="text-start p-3">ขึ้นโครงสร้างแล้วเสร็จ</p>
+                  </div>
+                  <div class="col-1">
+                    <p class="text-start p-3">40%</p>
+                  </div>
+                  <div class="col-2">
+                    <p class="text-end p-3">เป็นเงิน</p>
+                  </div>
+                  <div class="col-3">
+                    <input type="number" class="form-control text-end" [(ngModel)]="lessonprice.lesson2" readonly>
+                  </div>
+                  <div class="col-1">
+                    <p class="text-start p-3">บาท</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-2">
+                    <p class="text-start p-3">งวดที่ 3</p>
+                  </div>
+                  <div class="col-3">
+                    <p class="text-start p-3">ส่งมอบบ้านลูกค้า</p>
+                  </div>
+                  <div class="col-1">
+                    <p class="text-start p-3">20%</p>
+                  </div>
+                  <div class="col-2">
+                    <p class="text-end p-3">เป็นเงิน</p>
+                  </div>
+                  <div class="col-3">
+                    <input type="number" class="form-control text-end" [(ngModel)]="lessonprice.lesson3" readonly>
+                  </div>
+                  <div class="col-1">
+                    <p class="text-start p-3">บาท</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>รายละเอียด</ng-template>
+      <p class="h5">รูปภาพ,แบบ</p>
+
+      <div class="my-2">
+        <input type="file" class="form-control" ng2FileSelect [uploader]="uploader" (change)="onImageSelected($event)">
+        <br>
+        <mat-card>
+          <div style="text-align: center;">
+          <canvas class="align-middle" id="canvas" width="500" height="500"></canvas>
+        </div>
+        </mat-card>
+
+      </div>
+
+      <div class="my-2">
+        <mat-card>
+          <mat-card-header>
+            <p class="h5">รายละเอียด</p>
+          </mat-card-header>
+          <mat-card-content>
+            <textarea class="form-control" rows="8" [(ngModel)]="data_doc.doc_detail"></textarea>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </mat-step>
+  </mat-stepper>
+</div>
