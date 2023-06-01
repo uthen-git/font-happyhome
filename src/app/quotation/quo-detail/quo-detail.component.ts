@@ -5,8 +5,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppConfirmService } from 'src/app/services/app-confirm/app-confirm.service';
 import { service } from "./../../services/service";
-import { FileUploader } from 'ng2-file-upload';
-
 
 @Component({
   selector: 'app-quo-detail',
@@ -25,7 +23,6 @@ export class QuoDetailComponent implements OnInit {
 
   ) { }
 
-  public uploader: FileUploader = new FileUploader({ url: this.service.URL + 'quotations/upload' });
 
   data_doc: any = {
     doc_no: null,

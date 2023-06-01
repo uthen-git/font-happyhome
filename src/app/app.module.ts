@@ -29,8 +29,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { AppConfirmComponent } from './services/app-confirm/app-confirm.component';
 import { AppConfirmService } from "./services/app-confirm/app-confirm.service";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { FileUploadModule } from 'ng2-file-upload';
-import { NgxFileDropModule } from 'ngx-file-drop';
 
 
 @NgModule({
@@ -63,8 +61,6 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     FormsModule,
     MatStepperModule,
     MatSnackBarModule,
-    FileUploadModule,
-    NgxFileDropModule,
 
   ],
   providers: [DatePipe, AppConfirmService],
