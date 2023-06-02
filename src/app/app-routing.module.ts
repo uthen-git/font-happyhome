@@ -12,6 +12,10 @@ export const rootRouterConfig: Routes = [
     component:AdminLayoutComponent,
     children:[
       {
+        path: '',
+        component:DashboardComponent
+      },
+      {
         path: 'home',
         component:DashboardComponent
       },

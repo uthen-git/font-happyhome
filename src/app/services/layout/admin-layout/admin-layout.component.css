@@ -20,6 +20,9 @@ mat-nav-list{
 mat-card{
   border-radius: 10px;
 }
+.mat-mdc-list-base{
+  font-family: Mali, cursive !important;
+}
 
 .mat-stepper-vertical, .mat-stepper-horizontal {
   /* font-family: Roboto, sans-serif; */
