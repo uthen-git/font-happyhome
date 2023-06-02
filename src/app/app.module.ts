@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { rootRouterConfig } from "./app-routing.module";
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -12,7 +12,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuotationComponent } from './quotation/quotation.component';
-import { SigninComponent } from './signin/signin.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,7 +27,11 @@ import { DatePipe } from '@angular/common'
 import { MatStepperModule } from '@angular/material/stepper';
 import { AppConfirmComponent } from './services/app-confirm/app-confirm.component';
 import { AppConfirmService } from "./services/app-confirm/app-confirm.service";
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SigninComponent } from './sessions/signin/signin.component';
+import { AdminLayoutComponent } from './services/layout/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './services/layout/auth-layout/auth-layout.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -36,13 +39,14 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AppComponent,
     DashboardComponent,
     QuotationComponent,
-    SigninComponent,
     QuoDetailComponent,
     AppConfirmComponent,
+    SigninComponent,
+    AdminLayoutComponent,
+    AuthLayoutComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -61,7 +65,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FormsModule,
     MatStepperModule,
     MatSnackBarModule,
-
+    RouterModule.forRoot(rootRouterConfig, { useHash: false })
   ],
   providers: [DatePipe, AppConfirmService],
   bootstrap: [AppComponent]
