@@ -104,7 +104,8 @@ export class QuoDetailComponent implements OnInit {
       this.lessonprice.lesson1percent = data.lesson1percent
       this.lessonprice.lesson2percent = data.lesson2percent
       this.lessonprice.lesson3percent = data.lesson3percent
-      this.filename = data.image
+      // this.filename = data.image
+      this.imageSrc = data.image
       this.loadimage(data.image)
       this.http.get(this.service.URL + 'lessons/lessonbyquotid/' + this.data.id, { headers }).subscribe(async (datalesson: any) => {
 
@@ -182,9 +183,9 @@ export class QuoDetailComponent implements OnInit {
           lesson2price: this.lessonprice.lesson2,
           lesson3price: this.lessonprice.lesson3,
           quotation_detail: this.data_doc.doc_detail,
-          image:this.filename
+          image:this.imageSrc
         }, { headers }).subscribe(async (data: any) => {
-          await this.saveimage()
+          // await this.saveimage()
           await this.savedatalesson(data._id)
           await this.savedatainst(data._id)
           await this._snackBar.open("บันทึกสำเร็จ", 'OK', {
@@ -264,6 +265,7 @@ export class QuoDetailComponent implements OnInit {
     reader.onload = () => {
       this.imageSrc = reader.result as string;
       this.drawOnCanvas();
+      console.log(this.imageSrc)
     };
     reader.readAsDataURL(file);
 
@@ -274,15 +276,17 @@ export class QuoDetailComponent implements OnInit {
   }
 
   loadimage(filename:any){
-    this.http.get(this.service.URL + 'quotations/download/'+filename, { responseType: 'blob' })
-      .subscribe((response: Blob) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          this.imageSrc = reader.result as string;
-          this.drawOnCanvas();
-        };
-        reader.readAsDataURL(response);
-      });
+    // this.http.get(this.service.URL + 'quotations/download/'+filename, { responseType: 'blob' })
+    //   .subscribe((response: Blob) => {
+        // const reader = new FileReader();
+        // reader.onloadend = () => {
+          // this.imageSrc = reader.result as string;
+          // this.drawOnCanvas();
+        // };
+        this.drawOnCanvas();
+        // reader.readAsDataURL(response);
+        // reader.readAsText(filename)
+      // });
   }
 
   saveimage() {
