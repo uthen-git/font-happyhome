@@ -32,6 +32,11 @@ import { SigninComponent } from './sessions/signin/signin.component';
 import { AdminLayoutComponent } from './services/layout/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './services/layout/auth-layout/auth-layout.component';
 import { RouterModule } from '@angular/router';
+import { ManageUserComponent } from './manage-user/manage-user.component';
+import { ProjectComponent } from './project/project.component';
+import { ExpenseComponent } from './expense/expense.component';
+import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
+import { ExpenseDetailComponent } from './expense/expense-detail/expense-detail.component';
 
 
 @NgModule({
@@ -44,6 +49,11 @@ import { RouterModule } from '@angular/router';
     SigninComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    ManageUserComponent,
+    ProjectComponent,
+    ExpenseComponent,
+    ProjectDetailComponent,
+    ExpenseDetailComponent,
   ],
   imports: [
     BrowserModule,

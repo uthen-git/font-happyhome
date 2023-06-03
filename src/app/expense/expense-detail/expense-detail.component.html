@@ -1,0 +1,52 @@
+<div class="content-dialog">
+  <mat-card class="card-header">
+    <mat-card-content>
+      <!-- <h4>ข้อมูลใบเสนอราคา</h4> -->
+      <p class="h4">ข้อมูล ค่าใช้จ่าย</p>
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="savedata()">บันทึก</button>
+      <button mat-raised-button color="warn" (click)="dialogRef.close()">ยกเลิก</button>
+    </mat-card-actions>
+  </mat-card>
+  <br>
+  <mat-card>
+    <mat-card-content>
+      <div class="d-flex justify-content-between">
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">รายละเอียดค่าใช้จ่าย</label>
+          <input type="text" class="form-control" [(ngModel)]="dataexpense.expense_detail">
+        </div>
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">ยอด</label>
+          <input type="number" class="form-control" [(ngModel)]="dataexpense.expense_value">
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">วันที่จ่าย</label>
+          <input type="date" class="form-control" [(ngModel)]="dataexpense.expense_date">
+        </div>
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">ประเภทค่าใช้จ่าย</label>
+          <select class="form-select" [(ngModel)]="dataexpense.expense_group">
+            <option value="ค่าแรง">ค่าแรง</option>
+            <option value="ซื้อของ">ซื้อของ</option>
+            <option value="ค่าเดินทาง">ค่าเดินทาง</option>
+            <option value="ใช้จ่ายส่วนตัว">ใช้จ่ายส่วนตัว</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between">
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">Project</label>
+          <select class="form-select" [(ngModel)]="dataexpense.project">
+            <option *ngFor="let item of dataproject" value="{{item._id}}">{{item.project_name}}</option>
+          </select>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

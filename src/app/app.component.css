@@ -25,3 +25,7 @@ mat-card{
   /* font-family: Roboto, sans-serif; */
   font-family: Mali, cursive !important;
 }
+
+.content{
+  margin: 2%;
+}

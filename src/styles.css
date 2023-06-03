@@ -14,3 +14,15 @@ mat-card{
 .mat-mdc-dialog-container .mdc-dialog__content {
   font-family: Mali, cursive !important;
 }
+
+.content{
+  margin: 2%;
+}
+
+.content-dialog{
+  margin: 2%;
+}
+
+.card-header{
+  background-color: #6775c6b5;
+}

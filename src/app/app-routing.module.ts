@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuotationComponent } from './quotation/quotation.component';
-import { SessionsRoutes } from "./sessions/sessions.routing";
 import { AdminLayoutComponent } from "./services/layout/admin-layout/admin-layout.component";
 import { AuthLayoutComponent } from "./services/layout/auth-layout/auth-layout.component";
+import { ManageUserComponent } from './manage-user/manage-user.component';
+import { ProjectComponent } from './project/project.component';
+import { ExpenseComponent } from './expense/expense.component';
 
 export const rootRouterConfig: Routes = [
   {
@@ -22,6 +23,18 @@ export const rootRouterConfig: Routes = [
       {
         path:'quotation',
         component:QuotationComponent
+      },
+      {
+        path:'manage-user',
+        component:ManageUserComponent
+      },
+      {
+        path:'project',
+        component:ProjectComponent
+      },
+      {
+        path:'expense',
+        component:ExpenseComponent
       }
     ]
   },{

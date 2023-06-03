@@ -1,0 +1,58 @@
+<div class="content">
+  <mat-card>
+    <mat-card-content>
+      <h4>ข้อมูล Project</h4>
+    </mat-card-content>
+  </mat-card>
+  <br>
+  <button mat-raised-button color="primary" (click)="openDialog(null)">เพิ่ม Project</button>
+  <br>
+  <br>
+  <mat-card>
+    <table mat-table [dataSource]="projectdata" class="mat-elevation-z8">
+      <ng-container matColumnDef="NO">
+        <th mat-header-cell *matHeaderCellDef> ลำดับ. </th>
+        <td mat-cell *matCellDef="let element;let i = index;"> {{i+1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="project_name">
+        <th mat-header-cell *matHeaderCellDef> โปรเจ็ค. </th>
+        <td mat-cell *matCellDef="let element;let i = index;"> {{element.project_name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="project_start_date">
+        <th mat-header-cell *matHeaderCellDef> วันที่เริ่มงาน. </th>
+        <td mat-cell *matCellDef="let element;let i = index;"> {{ element.project_start_date | date:'mediumDate' }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="project_value">
+        <th mat-header-cell *matHeaderCellDef> มูลค่า. </th>
+        <td mat-cell *matCellDef="let element;let i = index;"> {{element.project_value | currency:'฿ '}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="project_status">
+        <th mat-header-cell *matHeaderCellDef> สถานะ. </th>
+        <td mat-cell *matCellDef="let element;let i = index;"> {{element.project_status }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="manage">
+        <th mat-header-cell *matHeaderCellDef>จัดการ</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab color="primary" (click)="openDialog(element._id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" (click)="delete(element._id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </mat-card>
+
+</div>
