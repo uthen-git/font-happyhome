@@ -5,9 +5,55 @@
     </mat-card-content>
   </mat-card>
   <br>
-  <button mat-raised-button color="primary" (click)="openDialog(null)">เพิ่ม ค่าใช้จ่าย</button>
-  <br>
-  <br>
+  <div class="d-flex justify-content-between">
+    <div class="mb-3">
+      <button class="mb-2" mat-raised-button color="primary" (click)="selectData()">ดึงข้อมูล</button>
+    </div>
+    <div class="mb-3">
+      <button class="mb-2" mat-raised-button color="primary" (click)="openDialog(null)">เพิ่ม ค่าใช้จ่าย</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-2 col-md-1 mb-4">
+
+    </div>
+    <div class="col-xl-3 col-md-4 mb-4">
+      <!-- <label for="inputAddress" class="form-label">Project</label>
+      <select class="form-select" [(ngModel)]="dataquery.project">
+        <option *ngFor="let item of dataproject" value="{{item._id}}">{{item.project_name}}</option>
+      </select> -->
+    </div>
+    <div class="col-xl-2 col-md-2 mb-4">
+      <label for="inputAddress" class="form-label">ปี</label>
+      <select class="form-select" [(ngModel)]="dataquery.year">
+        <option value="null">ทุกปี</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+      </select>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-4">
+      <label for="inputAddress" class="form-label">เดือน</label>
+      <select class="form-select" [(ngModel)]="dataquery.month">
+        <option value="null">ทุกเดือน</option>
+        <option value="01">มกราคม</option>
+        <option value="02">กุมภาพันธ์</option>
+        <option value="03">มีนาคม</option>
+        <option value="04">เมษายน</option>
+        <option value="05">พฤษภาคม</option>
+        <option value="06">มิถุนายน</option>
+        <option value="07">กรกฏาคม</option>
+        <option value="08">สิงหาคม</option>
+        <option value="09">กันยายน</option>
+        <option value="10">ตุลาคม</option>
+        <option value="11">พฤศจิกายน</option>
+        <option value="12">ธันวาคม</option>
+      </select>
+    </div>
+    <div class="col-xl-2 col-md-1 mb-4">
+
+    </div>
+  </div>
   <mat-card>
     <table mat-table [dataSource]="expensedata" class="mat-elevation-z8">
       <ng-container matColumnDef="NO">

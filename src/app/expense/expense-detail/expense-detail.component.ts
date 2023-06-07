@@ -68,7 +68,12 @@ export class ExpenseDetailComponent implements OnInit{
   }
 
   savedata() {
-    this.confirmService.confirm({
+    if(!this.dataexpense.project){
+      this._snackBar.open("กรุณาเลือก Project", 'OK', {
+        duration: 2000
+      });
+    }else{
+      this.confirmService.confirm({
       title: 'confirm',
       message: 'บันทึก ค่าใช้จ่าย?',
       width: '250px',
@@ -115,5 +120,8 @@ export class ExpenseDetailComponent implements OnInit{
         }
       }
     })
+    }
+
+
   }
 }

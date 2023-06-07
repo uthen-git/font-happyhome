@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppConfirmService } from '../services/app-confirm/app-confirm.service';
 import { service } from "../services/service";
 import { ExpenseDetailComponent } from "./expense-detail/expense-detail.component";
+import { MatTableDataSource } from '@angular/material/table';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-expense',
@@ -20,25 +22,40 @@ export class ExpenseComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) { }
 
-  expensedata: any = [];
+
+  expensedata: any;
   displayedColumns: string[] = ['NO', 'expense_detail', 'expense_value', 'expense_date', 'expense_group', 'project', 'manage'];
+
+  dataproject:any = []
+
+  dataquery:any = {
+    year:null,
+    month:null,
+    project:null
+  }
+
 
   ngOnInit(): void {
     this.selectData()
+    this.selectdataproject()
   }
-  // expense_detail: null,
-  //   expense_value: null,
-  //   expense_date: this.datepipe.transform(new Date(), 'yyyy-MM-dd'),
-  //   expense_group: null,
-  //   project: null
+  selectdataproject(){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    this.http.get(this.service.URL + 'projects', { headers }).subscribe(async (data: any) => {
+      this.dataproject = data
+    })
+  }
   selectData() {
     this.expensedata = []
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    this.http.get(this.service.URL + 'expenses', { headers }).subscribe((data: any) => {
+    this.http.get(this.service.URL + (this.dataquery.year&&this.dataquery.month?('expenses/'+this.dataquery.year+'/'+this.dataquery.month):'expenses'), { headers }).subscribe((data: any) => {
       // this.expensedata = data
       data.forEach((element: any, i: any) => {
+        console.log(element.project)
         this.http.get(this.service.URL + 'projects/'+element.project, { headers }).subscribe(async (dataproject: any) => {
           await this.expensedata.push({
             _id:element._id,
@@ -48,11 +65,12 @@ export class ExpenseComponent implements OnInit {
             expense_group: element.expense_group,
             project: dataproject.project_name
           })
-           this.expensedata = await [...this.expensedata]
+           this.expensedata =await [...this.expensedata];
+
         })
 
       });
-      console.log(this.expensedata)
+      // console.log(this.expensedata)
     })
   }
 
