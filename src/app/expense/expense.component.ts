@@ -26,12 +26,12 @@ export class ExpenseComponent implements OnInit {
   expensedata: any;
   displayedColumns: string[] = ['NO', 'expense_detail', 'expense_value', 'expense_date', 'expense_group', 'project', 'manage'];
 
-  dataproject:any = []
+  dataproject: any = []
 
-  dataquery:any = {
-    year:null,
-    month:null,
-    project:null
+  dataquery: any = {
+    year: null,
+    month: null,
+    project: null
   }
 
 
@@ -39,7 +39,7 @@ export class ExpenseComponent implements OnInit {
     this.selectData()
     this.selectdataproject()
   }
-  selectdataproject(){
+  selectdataproject() {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
@@ -52,22 +52,40 @@ export class ExpenseComponent implements OnInit {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    this.http.get(this.service.URL + (this.dataquery.year&&this.dataquery.month?('expenses/'+this.dataquery.year+'/'+this.dataquery.month):'expenses'), { headers }).subscribe((data: any) => {
+    this.http.get(this.service.URL + (this.dataquery.year && this.dataquery.month ? ('expenses/' + this.dataquery.year + '/' + this.dataquery.month) : 'expenses'), { headers }).subscribe((data: any) => {
       // this.expensedata = data
-      data.forEach((element: any, i: any) => {
-        console.log(element.project)
-        this.http.get(this.service.URL + 'projects/'+element.project, { headers }).subscribe(async (dataproject: any) => {
+      data.forEach(async (element: any, i: any) => {
+        if (element.project!=null) {
+          this.http.get(this.service.URL + 'projects/' + element.project, { headers }).subscribe(async (dataproject: any) => {
+
+            if(!dataproject){
+              console.log(element._id)
+            }
+            await this.expensedata.push({
+              _id: element._id,
+              expense_detail: element.expense_detail,
+              expense_value: element.expense_value,
+              expense_date: element.expense_date,
+              expense_group: element.expense_group,
+              project: dataproject.project_name
+            })
+            this.expensedata = await [...this.expensedata];
+
+          },(error)=>{
+            console.log('ไม่เจอ project',element._id)
+          })
+        } else {
           await this.expensedata.push({
-            _id:element._id,
+            _id: element._id,
             expense_detail: element.expense_detail,
             expense_value: element.expense_value,
             expense_date: element.expense_date,
             expense_group: element.expense_group,
-            project: dataproject.project_name
+            project: null
           })
-           this.expensedata =await [...this.expensedata];
+          this.expensedata = await [...this.expensedata];
+        }
 
-        })
 
       });
       // console.log(this.expensedata)

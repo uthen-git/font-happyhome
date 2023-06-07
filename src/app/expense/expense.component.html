@@ -26,7 +26,7 @@
     <div class="col-xl-2 col-md-2 mb-4">
       <label for="inputAddress" class="form-label">ปี</label>
       <select class="form-select" [(ngModel)]="dataquery.year">
-        <option value="null">ทุกปี</option>
+        <option value="{{null}}">ทุกปี</option>
         <option value="2022">2022</option>
         <option value="2023">2023</option>
         <option value="2024">2024</option>
@@ -35,7 +35,7 @@
     <div class="col-xl-3 col-md-4 mb-4">
       <label for="inputAddress" class="form-label">เดือน</label>
       <select class="form-select" [(ngModel)]="dataquery.month">
-        <option value="null">ทุกเดือน</option>
+        <option value="{{null}}">ทุกเดือน</option>
         <option value="01">มกราคม</option>
         <option value="02">กุมภาพันธ์</option>
         <option value="03">มีนาคม</option>
