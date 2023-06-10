@@ -6,11 +6,13 @@ import { AuthLayoutComponent } from "./services/layout/auth-layout/auth-layout.c
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ProjectComponent } from './project/project.component';
 import { ExpenseComponent } from './expense/expense.component';
+import { AuthGuard } from './services/guards/auth.guard';
 
 export const rootRouterConfig: Routes = [
   {
     path:'',
     component:AdminLayoutComponent,
+    canActivate:[AuthGuard],
     children:[
       {
         path: '',

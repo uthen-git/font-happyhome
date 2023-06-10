@@ -37,6 +37,7 @@ import { ProjectComponent } from './project/project.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
 import { ExpenseDetailComponent } from './expense/expense-detail/expense-detail.component';
+import { AuthGuard } from './services/guards/auth.guard';
 
 
 @NgModule({
@@ -77,7 +78,7 @@ import { ExpenseDetailComponent } from './expense/expense-detail/expense-detail.
     MatSnackBarModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false })
   ],
-  providers: [DatePipe, AppConfirmService],
+  providers: [DatePipe, AppConfirmService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
