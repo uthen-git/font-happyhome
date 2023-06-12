@@ -1,0 +1,42 @@
+<div class="content-dialog">
+  <mat-card class="card-header">
+    <mat-card-content>
+      <p class="h4">ข้อมูลผู้ใช้</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="savedata()">บันทึก</button>
+      <button mat-raised-button color="warn" (click)="dialogRef.close()">ยกเลิก</button>
+    </mat-card-actions>
+  </mat-card>
+  <br>
+  <mat-card>
+    <mat-card-content>
+      <div class="d-flex justify-content-between">
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">ชื่อ</label>
+          <input type="text" class="form-control" [(ngModel)]="datauser.first_name">
+        </div>
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">นามสกุล</label>
+          <input type="text" class="form-control" [(ngModel)]="datauser.last_name">
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <input class="form-control form-control-lg" type="email" name="myInput" [(ngModel)]="datauser.email">
+        <label class="form-label" for="form3Example3">Email</label>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">สิทธิ์</label>
+          <select class="form-select" [(ngModel)]="datauser.role">
+            <option value="owner">owner</option>
+            <option value="admin">admin</option>
+            <option value="none">ไม่มีสิทธิ์</option>
+          </select>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

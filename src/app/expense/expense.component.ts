@@ -7,6 +7,7 @@ import { service } from "../services/service";
 import { ExpenseDetailComponent } from "./expense-detail/expense-detail.component";
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-expense',
@@ -48,6 +49,7 @@ export class ExpenseComponent implements OnInit {
     })
   }
   selectData() {
+    // Swal.showLoading()
     this.expensedata = []
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
@@ -55,10 +57,10 @@ export class ExpenseComponent implements OnInit {
     this.http.get(this.service.URL + (this.dataquery.year && this.dataquery.month ? ('expenses/' + this.dataquery.year + '/' + this.dataquery.month) : 'expenses'), { headers }).subscribe((data: any) => {
       // this.expensedata = data
       data.forEach(async (element: any, i: any) => {
-        if (element.project!=null) {
+        if (element.project != null) {
           this.http.get(this.service.URL + 'projects/' + element.project, { headers }).subscribe(async (dataproject: any) => {
 
-            if(!dataproject){
+            if (!dataproject) {
               console.log(element._id)
             }
             await this.expensedata.push({
@@ -71,8 +73,8 @@ export class ExpenseComponent implements OnInit {
             })
             this.expensedata = await [...this.expensedata];
 
-          },(error)=>{
-            console.log('ไม่เจอ project',element._id)
+          }, (error) => {
+            console.log('ไม่เจอ project', element._id)
           })
         } else {
           await this.expensedata.push({
@@ -85,7 +87,9 @@ export class ExpenseComponent implements OnInit {
           })
           this.expensedata = await [...this.expensedata];
         }
-
+        if (data.length == i+1) {
+          // Swal.hideLoading()
+        }
 
       });
       // console.log(this.expensedata)

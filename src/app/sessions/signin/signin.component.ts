@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { service } from "../../services/service";
 import { JwtAuthService } from 'src/app/services/auth/jwt-auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signin',
@@ -20,18 +21,35 @@ export class SigninComponent {
     private jwtAuth: JwtAuthService,
   ) { }
 
-  userdata :any = {
-    email:"uthendevelop@gmail.com",
-    password:"1234"
+  userdata: any = {
+    email: null,
+    password: null
   }
 
   signin() {
-    console.log(this.userdata.email,this.userdata.password)
+    Swal.showLoading()
+    // Swal.fire('Hello SweetAlert2!');
+    // console.log(this.userdata.email, this.userdata.password)
     // this.router.navigate(['/home']);
 
-    this.jwtAuth.signin(this.userdata.email,this.userdata.password)
-    .subscribe(response => {
-      this.router.navigateByUrl(this.jwtAuth.return);
-    })
+    this.jwtAuth.signin(this.userdata.email, this.userdata.password)
+      .subscribe(response => {
+        this.router.navigateByUrl(this.jwtAuth.return);
+        Swal.fire({
+          icon: 'success',
+          title: 'success!',
+          text: 'เข้าสู่ระบบสำเร็จ',
+          timer: 2000,
+          timerProgressBar: true,
+        })
+      }, () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'รหัสผ่านไม่ถูกต้อง!',
+          allowOutsideClick: false
+
+          // text: 'รหัสผ่านไม่ถูกต้อง',
+        })
+      })
   }
 }

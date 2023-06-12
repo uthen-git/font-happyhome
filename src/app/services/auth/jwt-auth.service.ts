@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { LocalStoreService } from "../local-store.service";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router, ActivatedRoute } from "@angular/router";
 import { map, catchError, delay } from "rxjs/operators";
 // import { User } from "../../models/user.model";
 import { of, BehaviorSubject, throwError } from "rxjs";
 import { service } from "../service";
+import Swal from "sweetalert2";
 // ================= only for demo purpose ===========
 interface User {
   id?: string;
@@ -78,8 +79,8 @@ export class JwtAuthService {
     shared/components/layouts/admin-layout/admin-layout.component.ts
   */
   public checkTokenIsValid() {
-    // console.log( JSON.parse(this.ls.getItem(this.APP_USER)))
-    var id : any = (this.ls.getItem("user_id"))
+    var jsonString: any = JSON.stringify(this.ls.getItem(this.APP_USER));
+    var id: any = (JSON.parse(jsonString)._id)
 
     // return of(DEMO_USER)
     //   .pipe(
@@ -98,15 +99,29 @@ export class JwtAuthService {
       Request header using token.interceptor
       This checks if the existing token is valid when app is reloaded
     */
-
-    return this.http.get(this.service.URL+'users/'+id)
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-access-token': this.getJwtToken()
+    });
+    return this.http.get(this.service.URL + 'users/' + id, { headers })
       .pipe(
         map((profile: User) => {
           this.setUserAndToken(this.getJwtToken(), profile, true);
           return profile;
         }),
         catchError((error) => {
-          this.signout();
+          Swal.fire({
+            icon: 'error',
+            title: 'session หมดอายุ',
+            allowOutsideClick: false,
+          }).then((result) => {
+            // โค้ดที่ต้องการให้ทำหลังจากผู้ใช้ปิด popup
+            if (result.isConfirmed) {
+              // กระทำเมื่อผู้ใช้คลิกปุ่ม OK
+              this.signout();
+            }
+          });
+
           return of(error);
         })
       );
@@ -131,16 +146,20 @@ export class JwtAuthService {
   setUserAndToken(token: any, userdata: any, isAuthenticated: Boolean) {
     this.isAuthenticated = isAuthenticated;
     this.token = token;
-    this.user = {
-      id: userdata._id,
-      first_name: userdata.first_name,
-      last_name: userdata.last_name,
-      email:userdata.email
-    };
+    if (userdata) {
+      this.user = {
+        id: userdata._id,
+        first_name: userdata.first_name,
+        last_name: userdata.last_name,
+        email: userdata.email
+      };
+      // this.ls.setItem("user_id", userdata._id);
+    }
+
     this.user$.next(userdata);
     this.ls.setItem(this.JWT_TOKEN, token);
     this.ls.setItem(this.APP_USER, userdata);
-    this.ls.setItem("user_id", userdata._id);
+
 
   }
 }

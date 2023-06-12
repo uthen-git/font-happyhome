@@ -38,6 +38,8 @@ import { ExpenseComponent } from './expense/expense.component';
 import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
 import { ExpenseDetailComponent } from './expense/expense-detail/expense-detail.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { SignupComponent } from './sessions/signup/signup.component';
+import { UserDetailComponent } from './manage-user/user-detail/user-detail.component';
 
 
 @NgModule({
@@ -48,6 +50,7 @@ import { AuthGuard } from './services/guards/auth.guard';
     QuoDetailComponent,
     AppConfirmComponent,
     SigninComponent,
+    SignupComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
     ManageUserComponent,
@@ -55,6 +58,7 @@ import { AuthGuard } from './services/guards/auth.guard';
     ExpenseComponent,
     ProjectDetailComponent,
     ExpenseDetailComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,
