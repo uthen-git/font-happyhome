@@ -3,6 +3,11 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>Happyhome</span>
+  <span class="example-spacer"></span>
+  <span>{{userdata.username}}</span>
+  <button mat-icon-button (click)="signout()">
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side">
@@ -12,7 +17,7 @@
       <a mat-list-item routerLink="/manage-user">จัดการผู้ใช้งาน</a>
       <a mat-list-item routerLink="/project">Project</a>
       <a mat-list-item routerLink="/expense">ค่าใช้จ่าย</a>
-      <a mat-list-item (click)="signout()" routerLink="/sessions/signin">ออกจากระบบ</a>
+      <!-- <a mat-list-item (click)="signout()" routerLink="/sessions/signin">ออกจากระบบ</a> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

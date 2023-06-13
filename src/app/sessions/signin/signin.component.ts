@@ -28,12 +28,10 @@ export class SigninComponent {
 
   signin() {
     Swal.showLoading()
-    // Swal.fire('Hello SweetAlert2!');
-    // console.log(this.userdata.email, this.userdata.password)
-    // this.router.navigate(['/home']);
 
     this.jwtAuth.signin(this.userdata.email, this.userdata.password)
       .subscribe(response => {
+        console.log(response.status)
         this.router.navigateByUrl(this.jwtAuth.return);
         Swal.fire({
           icon: 'success',
@@ -42,14 +40,28 @@ export class SigninComponent {
           timer: 2000,
           timerProgressBar: true,
         })
-      }, () => {
-        Swal.fire({
-          icon: 'error',
-          title: 'รหัสผ่านไม่ถูกต้อง!',
-          allowOutsideClick: false
+      }, (e) => {
+        console.log(e.status)
+        if (e.status == 400) {
+          Swal.fire({
+            icon: 'error',
+            title: 'รหัสผ่านไม่ถูกต้อง!',
+            allowOutsideClick: false
+          })
+        } else if (e.status == 501) {
+          Swal.fire({
+            icon: 'error',
+            title: 'ไม่มีสิทธ์เข้าใช้งาน!',
+            allowOutsideClick: false
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'ไม่สามารถเข้าสู่ระบบได้!',
+            allowOutsideClick: false
+          })
+        }
 
-          // text: 'รหัสผ่านไม่ถูกต้อง',
-        })
       })
   }
 }

@@ -58,6 +58,9 @@ export class JwtAuthService {
     // FOLLOWING CODE SENDS SIGNIN REQUEST TO SERVER
 
     this.signingIn = true;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
     return this.http.post(this.service.URL + 'users/login',
       {
         email: email,

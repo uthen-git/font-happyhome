@@ -30,7 +30,7 @@ export class SignupComponent {
 
   signup() {
     Swal.fire({
-      title: 'ยืนยันเพิ่มผู้ใช้งาน?',
+      title: 'ยืนยันส่งคำขอ',
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: 'ยืนยัน',

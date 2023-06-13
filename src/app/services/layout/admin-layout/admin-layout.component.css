@@ -28,3 +28,7 @@ mat-card{
   /* font-family: Roboto, sans-serif; */
   font-family: Mali, cursive !important;
 }
+
+.example-spacer {
+  flex: 1 1 auto;
+}
