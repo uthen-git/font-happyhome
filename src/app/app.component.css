@@ -13,19 +13,27 @@ mat-toolbar {
   color: white; */
   font-family: Mali, cursive !important;
 }
-mat-nav-list{
+
+mat-nav-list {
   font-family: Mali, cursive !important;
 }
 
-mat-card{
+mat-card {
   border-radius: 10px;
 }
 
-.mat-stepper-vertical, .mat-stepper-horizontal {
+.mat-stepper-vertical,
+.mat-stepper-horizontal {
   /* font-family: Roboto, sans-serif; */
   font-family: Mali, cursive !important;
 }
 
-.content{
+.content {
   margin: 2%;
+}
+
+.prognamecard {
+  background-color: #f7fbfd !important;
+  font-family: Mali, cursive !important;
+
 }

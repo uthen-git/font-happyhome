@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { service } from "../../services/service";
 import { JwtAuthService } from 'src/app/services/auth/jwt-auth.service';
 import Swal from 'sweetalert2';
+import { service } from "../../services/service";
 
 @Component({
   selector: 'app-signin',

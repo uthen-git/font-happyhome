@@ -1,18 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { AppConfirmService } from '../services/app-confirm/app-confirm.service';
 import { service } from "../services/service";
 import { ExpenseDetailComponent } from "./expense-detail/expense-detail.component";
-import { MatTableDataSource } from '@angular/material/table';
-import { FormControl } from '@angular/forms';
-import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
-  styleUrls: ['./expense.component.css']
+  styleUrls: ['../app.component.css']
 })
 export class ExpenseComponent implements OnInit {
   constructor(
@@ -23,7 +23,9 @@ export class ExpenseComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) { }
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  dataSource!: MatTableDataSource<any>
   expensedata: any;
   displayedColumns: string[] = ['NO', 'expense_detail', 'expense_value', 'expense_date', 'expense_group', 'project', 'manage'];
 
@@ -55,44 +57,22 @@ export class ExpenseComponent implements OnInit {
       'Content-Type': 'application/json'
     });
     this.http.get(this.service.URL + (this.dataquery.year && this.dataquery.month ? ('expenses/' + this.dataquery.year + '/' + this.dataquery.month) : 'expenses'), { headers }).subscribe((data: any) => {
-      // this.expensedata = data
       data.forEach(async (element: any, i: any) => {
-        if (element.project != null) {
-          this.http.get(this.service.URL + 'projects/' + element.project, { headers }).subscribe(async (dataproject: any) => {
-
-            if (!dataproject) {
-              console.log(element._id)
-            }
             await this.expensedata.push({
               _id: element._id,
               expense_detail: element.expense_detail,
               expense_value: element.expense_value,
               expense_date: element.expense_date,
               expense_group: element.expense_group,
-              project: dataproject.project_name
+              project:element.project?this.dataproject.filter((pj:any) => pj._id == element.project)[0].project_name:null
             })
             this.expensedata = await [...this.expensedata];
-
-          }, (error) => {
-            console.log('ไม่เจอ project', element._id)
-          })
-        } else {
-          await this.expensedata.push({
-            _id: element._id,
-            expense_detail: element.expense_detail,
-            expense_value: element.expense_value,
-            expense_date: element.expense_date,
-            expense_group: element.expense_group,
-            project: null
-          })
-          this.expensedata = await [...this.expensedata];
-        }
         if (data.length == i+1) {
-          // Swal.hideLoading()
+          this.dataSource = new MatTableDataSource([...this.expensedata]);
+          this.dataSource.paginator = this.paginator;
+          this.paginator.pageSize = 5;
         }
-
       });
-      // console.log(this.expensedata)
     })
   }
 
