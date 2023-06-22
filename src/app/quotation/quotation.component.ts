@@ -5,22 +5,27 @@ import { MatDialog } from '@angular/material/dialog';
 import { service } from "../services/service";
 import { AppConfirmService } from '../services/app-confirm/app-confirm.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 @Component({
   selector: 'app-quotation',
   templateUrl: './quotation.component.html',
-  styleUrls: ['./quotation.component.css']
+  styleUrls: ['../app.component.css']
 })
 export class QuotationComponent implements OnInit{
   quotationdata: any;
   displayedColumns: string[] = ['NO','quotation_code', 'quotation_date', 'customer_name','total','manage'];
 
   constructor(
+
     private http: HttpClient,
     public dialog: MatDialog,
     private service: service,
     private confirmService: AppConfirmService,
-    private _snackBar: MatSnackBar
-    ) { }
+    private _snackBar: MatSnackBar,
+    ) {
+    }
 
   ngOnInit(): void {
     this.selectData()
@@ -71,4 +76,25 @@ export class QuotationComponent implements OnInit{
       }
     })
   }
+
+  generatePDF() {
+    pdfMake.createPdf({ content: 'Hello, PDF!' }).open();
+  }
+
+  print() {
+    Swal.fire({
+      title: 'เลือกเอกสาร',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'ใบเสนอราคา',
+      denyButtonText: `สัญญาสั่งสร้าง`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.generatePDF()
+      } else if (result.isDenied) {
+
+      }
+    })
+  }
+
 }
