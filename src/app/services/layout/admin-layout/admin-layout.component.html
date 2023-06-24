@@ -4,7 +4,7 @@
   </button>
   <span>Happyhome</span>
   <span class="example-spacer"></span>
-  <span>{{userdata.username}}</span>
+  <span>{{userdata?.first_name}} {{userdata?.last_name}} <h4>(วันใช้งาน {{expiredate}} วัน)</h4></span>
   <button mat-icon-button (click)="signout()">
     <mat-icon>logout</mat-icon>
   </button>
@@ -14,10 +14,11 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/home">หน้าหลัก</a>
       <a mat-list-item routerLink="/quotation">ใบเสนอราคา</a>
-      <a mat-list-item routerLink="/manage-user">จัดการผู้ใช้งาน</a>
-      <a mat-list-item routerLink="/project">Project</a>
-      <a mat-list-item routerLink="/expense">ค่าใช้จ่าย</a>
-      <!-- <a mat-list-item (click)="signout()" routerLink="/sessions/signin">ออกจากระบบ</a> -->
+      <a mat-list-item *ngIf="userdata.role == 'owner'" routerLink="/manage-user">จัดการผู้ใช้งาน</a>
+      <a mat-list-item *ngIf="userdata.role == 'owner'" routerLink="/project">Project</a>
+      <a mat-list-item *ngIf="userdata.role == 'owner'" routerLink="/expense">ค่าใช้จ่าย</a>
+      <a mat-list-item target=”_blank” href="https://www.iloveimg.com/th/watermark-image">เพิ่มลายน้ำ</a>
+      <a mat-list-item target=”_blank” href="https://www.watermarkremover.io/th">ลบลายน้ำ</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
