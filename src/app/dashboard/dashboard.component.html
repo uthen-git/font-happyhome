@@ -1,5 +1,21 @@
 <div class="content">
-
+  <div class="row">
+    <div class="col-xl-12 col-md-12 mb-4">
+      <mat-card>
+        <mat-card-header>
+          <p class="h4">เป้าหมายปี 2566 ที่ {{progress.target}} Project</p><img width="70" height="70" src="../../assets/images/running.gif" alt="Your GIF" />
+        </mat-card-header>
+        <mat-card-content>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [attr.aria-valuenow]="progress.percent" aria-valuemin="0" aria-valuemax="100" [style.width]="progress.percent + '%'">{{progress.now}}</div>
+          </div>
+          <!-- <div class="progress">
+            <div class="progress-bar" role="progressbar" [style.width]="progress + '%'" [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+          </div> -->
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
   <!-- <div class="row">
 
     <div class="col-xl-6 col-md-6 mb-4">

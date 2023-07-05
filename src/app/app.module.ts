@@ -41,6 +41,7 @@ import { AdminLayoutComponent } from './services/layout/admin-layout/admin-layou
 import { AuthLayoutComponent } from './services/layout/auth-layout/auth-layout.component';
 import { SigninComponent } from './sessions/signin/signin.component';
 import { SignupComponent } from './sessions/signup/signup.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { SignupComponent } from './sessions/signup/signup.component';
     MatPaginatorModule,
     MatStepperModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false })
   ],
   providers: [DatePipe, AppConfirmService,AuthGuard],
