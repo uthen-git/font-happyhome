@@ -39,7 +39,7 @@ export class ExpenseComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.selectData()
+
     this.selectdataproject()
   }
   selectdataproject() {
@@ -48,6 +48,7 @@ export class ExpenseComponent implements OnInit {
     });
     this.http.get(this.service.URL + 'projects', { headers }).subscribe(async (data: any) => {
       this.dataproject = data
+      this.selectData()
     })
   }
   selectData() {

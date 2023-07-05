@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { service } from '../services/service';
+import { JwtAuthService } from '../services/auth/jwt-auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,12 @@ export class DashboardComponent implements OnInit{
   constructor(
     private http: HttpClient,
     private _service: service,
-  ) { }
+    private jwtAuth: JwtAuthService,
+  ) {
+    this.jwtAuth.checkTokenIsValid().subscribe((res) => {
+      this.userdata = res;
+    });
+  }
 
   public progress:any = {
     target : 30,
@@ -31,4 +37,13 @@ export class DashboardComponent implements OnInit{
     })
   }
 
+  userdata?: any = {
+    email: null,
+    first_name: null,
+    last_name: null,
+    password: null,
+    role: null,
+    __v: null,
+    _id: null,
+  };
 }
