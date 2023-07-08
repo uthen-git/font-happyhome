@@ -1,0 +1,33 @@
+<div class="content-dialog">
+  <mat-card class="card-header">
+    <mat-card-content>
+      <p class="h4">ข้อมูลวัสดุ</p>
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="savedata()">บันทึก</button>
+      <button mat-raised-button color="warn" (click)="dialogRef.close()">ยกเลิก</button>
+    </mat-card-actions>
+  </mat-card>
+  <br>
+  <mat-card>
+    <mat-card-content>
+      <div class="d-flex justify-content-between">
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">วัสดุ</label>
+          <input type="text" class="form-control" [(ngModel)]="MaterialData.MaterialDesc">
+        </div>
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">ราคา/หน่วย</label>
+          <input type="number" class="form-control" [(ngModel)]="MaterialData.PricePerUnit">
+        </div>
+      </div>
+      <div class="d-flex justify-content-between">
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">หน่วย</label>
+          <input type="text" class="form-control" [(ngModel)]="MaterialData.UnitDesc">
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

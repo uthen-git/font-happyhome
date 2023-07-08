@@ -42,6 +42,8 @@ import { AuthLayoutComponent } from './services/layout/auth-layout/auth-layout.c
 import { SigninComponent } from './sessions/signin/signin.component';
 import { SignupComponent } from './sessions/signup/signup.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ConstructionCostCalComponent } from './construction-cost-cal/construction-cost-cal.component';
+import { MaterialAddComponent } from './construction-cost-cal/material-add/material-add.component';
 
 
 @NgModule({
@@ -61,6 +63,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     ProjectDetailComponent,
     ExpenseDetailComponent,
     UserDetailComponent,
+    ConstructionCostCalComponent,
+    MaterialAddComponent,
   ],
   imports: [
     BrowserModule,

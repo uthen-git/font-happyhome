@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { service } from "../../services/service";
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -10,7 +10,7 @@ import { AppConfirmService } from 'src/app/services/app-confirm/app-confirm.serv
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.css']
 })
-export class ProjectDetailComponent {
+export class ProjectDetailComponent implements OnInit{
   constructor(
     public dialogRef: MatDialogRef<ProjectDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,

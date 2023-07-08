@@ -12,11 +12,12 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side">
     <mat-nav-list>
-      <a mat-list-item routerLink="/home">หน้าหลัก</a>
-      <a mat-list-item routerLink="/quotation">ใบเสนอราคา</a>
-      <a mat-list-item *ngIf="userdata.role == 'owner'" routerLink="/manage-user">จัดการผู้ใช้งาน</a>
-      <a mat-list-item *ngIf="userdata.role == 'owner'" routerLink="/project">Project</a>
-      <a mat-list-item *ngIf="userdata.role == 'owner'" routerLink="/expense">ค่าใช้จ่าย</a>
+      <a mat-list-item routerLink="/home"><img width="20" height="20" src="../../../../assets/images/home.png" /> หน้าหลัก</a>
+      <a mat-list-item routerLink="/quotation"><img width="20" height="20" src="../../../../assets/images/group.png" /> ใบเสนอราคา</a>
+      <a mat-list-item routerLink="/construction-cost-cal"><img width="20" height="20" src="../../../../assets/images/budget.png"  /> คำนวนค่าก่อสร้าง</a>
+      <a mat-list-item *ngIf="userdata.role == 'owner'" routerLink="/project"><img width="20" height="20" src="../../../../assets/images/engineering.png"  /> Project</a>
+      <a mat-list-item *ngIf="userdata.role == 'owner'" routerLink="/expense"><img width="20" height="20" src="../../../../assets/images/budget2.png"  /> ค่าใช้จ่าย</a>
+      <a mat-list-item *ngIf="userdata.role == 'owner'" routerLink="/manage-user"><img width="20" height="20" src="../../../../assets/images/group.png"  /> จัดการผู้ใช้งาน</a>
       <a mat-list-item target=”_blank” href="https://www.iloveimg.com/th/watermark-image">เพิ่มลายน้ำ</a>
       <a mat-list-item target=”_blank” href="https://www.watermarkremover.io/th">ลบลายน้ำ</a>
     </mat-nav-list>

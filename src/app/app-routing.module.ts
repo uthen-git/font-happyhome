@@ -7,6 +7,7 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ProjectComponent } from './project/project.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { ConstructionCostCalComponent } from './construction-cost-cal/construction-cost-cal.component';
 
 export const rootRouterConfig: Routes = [
   {
@@ -37,6 +38,10 @@ export const rootRouterConfig: Routes = [
       {
         path:'expense',
         component:ExpenseComponent
+      },
+      {
+        path:'construction-cost-cal',
+        component:ConstructionCostCalComponent
       }
     ]
   },{
